@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="book.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <title>Bus Tracking System-book now</title>
+  </head>
+
+  <body>
+    <section id="header">
+      <nav class="navbar navbar-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src="img/logo-white.png" /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="book.html">BOOK NOW</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="calender.html">CALENDER</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pick_bus.html">GET BUS LOCATION</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="admin_login.html">Log Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </section>
+    <!-- welcome text -->
+    <section id="welcome">
+      <div class="container">
+        <div class="welcome text-center wow slideInLeft">
+          <h1>EXPLORE OUR SEAT BOOKING PAGE TO RESERVE SEATS</h1>
+        </div>
+      </div>
+    </section>
+    <div class="my-5 px-4">
+      <h2 class="fw-bold h-font text-center">SEARCH YOUR BUS</h2>
+      <div class="h-line bg-dark"></div>
+    </div>
+    <div class="mt-4 container">
+      <div class="row mb-5">
+        <div class="col-lg-3 mb-4">
+          <nav
+            class="navbar navbar-expand-lg navbar-light bg-white rounded shadow"
+          >
+            <div class="container-fluid flex-lg-column align-items-stretch">
+              <h5 class="mt-2">Serch For Buses</h5>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#filterdropdown"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div
+                class="collapse navbar-collapse flex-column align-items-stretch mt-2"
+                id="filterdropdown"
+              >
+                <div class="card-wrapper">
+                  <div class="border bg-light p-3 rounded mb-3 card">
+                    <h5 class="mb-3" style="font-size: 18px">
+                      Check Availability
+                    </h5>
+                    <label class="form-label">Enter route Number</label>
+                    <input
+                      type="text"
+                      class="form-control shadow-none mb-3"
+                      id="routeInput"
+                    />
+                  </div>
+                  <div class="col-lg-1 mb-lg-3 mt-2">
+                    <button
+                      type="submit"
+                      class="btn bg-primary text-white shadow-none"
+                      id="searchButton"
+                    >
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="col-lg-9 col-md-12 px-5">
+          <div class="card mb-3 border-0 shadow">
+            <div class="col-md-7 px-lg-3">
+              <div class="card-body">
+                <div id="busList"></div>
+                <!-- Bus information will be displayed here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- seat selection -->
+    <div class="my-5 px-4" id="seat_selection">
+      <h2 class="fw-bold h-font text-center">BOOK YOUR SEATS</h2>
+      <div class="h-line bg-dark"></div>
+    </div>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card mt-4">
+            <div class="card-body">
+              <h5 class="card-title">Seat Selection</h5>
+              <form id="seatSelectionForm">
+                <div class="form-group">
+                  <label for="Username">Name *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="Username"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="Numseats">Number of Seats *</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="Numseats"
+                    required
+                  />
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-primary mt-3"
+                  onclick="takeData()"
+                >
+                  Start Selecting
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card mt-4">
+            <div class="card-body">
+              <h5 class="card-title">Selected Seats</h5>
+              <table class="table Displaytable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Number of Seats</th>
+                    <th>Seats</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <textarea
+                        id="nameDisplay"
+                        class="form-control"
+                        readonly
+                      ></textarea>
+                    </td>
+                    <td>
+                      <textarea
+                        id="NumberDisplay"
+                        class="form-control"
+                        readonly
+                      ></textarea>
+                    </td>
+                    <td>
+                      <textarea
+                        id="seatsDisplay"
+                        class="form-control"
+                        readonly
+                      ></textarea>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 seatStructure">
+          <table class="table">
+            <tbody id="seatsBlock">
+              <!-- Seat selection grid will be dynamically generated here -->
+            </tbody>
+          </table>
+          <button
+            type="button"
+            class="btn btn-success"
+            onclick="updateTextArea()"
+          >
+            Confirm Selection
+          </button>
+          <p id="errorMessage" class="text-danger mt-2"></p>
+        </div>
+      </div>
+    </div>
+
+    <section id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <img src="img/logo-white.png" class="footer-logo" />
+            <p>
+              "THANK YOU FOR USING OUR BUS TRACKING SERVICE. WE APPRECIATE YOUR
+              PATRONAGE!"
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h1>Features</h1>
+            <p>State-of-the-art equipment</p>
+            <p>Expert trainers</p>
+            <p>Group bus travel classes</p>
+            <p>24/7 access</p>
+            <p>Clean and comfortable environment</p>
+          </div>
+
+          <div class="col-md-3">
+            <h1>Contact Us</h1>
+            <p><i class="fa-solid fa-phone"></i>+94 712514638</p>
+            <p>
+              <i class="fa-solid fa-envelope"></i>
+              bus_travel@gmail.com
+            </p>
+            <p>
+              <i class="fa-solid fa-house"></i>123 Main Street<br />
+              Apartment 4B Anytown,<br />
+              USA
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h1>Follow Us On</h1>
+            <p><i class="fa-brands fa-facebook"></i> facebook</p>
+            <p><i class="fa-brands fa-instagram"></i> instagram</p>
+            <p><i class="fa-brands fa-youtube"></i> youtube</p>
+            <p><i class="fa-brands fa-linkedin"></i> linkedin</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script type="module">
+      // Import Firebase modules
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        onValue,
+        get,
+        set,
+      } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+      // Firebase configuration (same as before)
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCKYdEtZmhE_GLfR1LsIKf75e_YbQjDvSs",
+        authDomain: "computing-project-f65ec.firebaseapp.com",
+        databaseURL:
+          "https://computing-project-f65ec-default-rtdb.firebaseio.com",
+        projectId: "computing-project-f65ec",
+        storageBucket: "computing-project-f65ec.appspot.com",
+        messagingSenderId: "126022707574",
+        appId: "1:126022707574:web:795b761b783e0dfa62f257",
+        measurementId: "G-XG2N2HVR9M",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+
+      // Get reference to the buses node in the database
+      const busesRef = ref(database, "buses");
+
+      // Function to render bus information in HTML
+      function renderBus(bus) {
+        const busList = document.getElementById("busList");
+        busList.innerHTML = "";
+        const busElement = document.createElement("div");
+        busElement.innerHTML = `
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">${bus.bus_number}</h5>
+        <p class="card-text">Destination: ${bus.destination}</p>
+        <p class="card-text">Arrival Time: ${bus.arrival_time}</p>
+        <p class="card-text">Departure Time: ${bus.departure_time}</p>
+        <!-- Add other fields as needed -->
+        
+        <!-- Your button -->
+    <button
+        type="button"
+        class="btn bg-primary text-white shadow-none mt-3"
+        onclick="navigateToSeatSelection()"
+    >
+        Book Your Seat
+    </button>
+      </div>
+    </div>
+  `;
+        busList.appendChild(busElement);
+      }
+
+      // Listen for changes in the bus data and render them
+      onValue(busesRef, (snapshot) => {
+        const busesData = snapshot.val();
+        // Clear previous bus information
+        document.getElementById("busList").innerHTML = "";
+        // Render each bus
+        for (const busId in busesData) {
+          const bus = busesData[busId];
+          renderBus(bus);
+        }
+      });
+
+      // Get the input and search button elements
+      const routeInput = document.getElementById("routeInput");
+      const searchButton = document.getElementById("searchButton");
+
+      // Add event listener to the search button
+      searchButton.addEventListener("click", () => {
+        const enteredRouteNumber = routeInput.value.trim();
+
+        onValue(busesRef, (snapshot) => {
+          const busesData = snapshot.val();
+          for (const busId in busesData) {
+            // for loop an object
+            const bus = busesData[busId];
+            if (bus.bus_number == enteredRouteNumber) {
+              renderBus(bus);
+              window.busId = busId;
+              return;
+            }
+          }
+          busList.innerHTML = "<p>No bus data found....!</p>";
+        });
+      });
+
+      window.loadSeats = async function () {
+        //console.log(window.busId);
+        var rows = ["A", "B", "C", "D", "E"];
+        var cols = 12;
+        var seatsBlock = $("#seatsBlock");
+        seatsBlock.empty();
+        const seats = await get(
+          ref(database, `buses/${window.busId}/seats`)
+        ).then((x) => x.val() || {});
+        //console.log(seats.val());
+        for (var i = 0; i < rows.length; i++) {
+          var row = $("<tr>");
+          row.append($("<td>").text(rows[i]));
+          for (var j = 1; j <= cols; j++) {
+            const v = seats[rows[i] + j] ? true : false;
+            var seat = $("<input>")
+              .attr("type", "checkbox")
+              .addClass("seats")
+              .attr("checked", v)
+              .attr("disabled", v)
+              .val(rows[i] + j);
+            var seatCell = $("<td>").append(seat);
+            row.append(seatCell);
+          }
+          seatsBlock.append(row);
+        }
+      };
+      window.updateTextArea = async function () {
+        var numSeats = parseInt($("#Numseats").val());
+        var selectedSeats = $(".seats:checked:not(:disabled)").length;
+        if (selectedSeats !== numSeats) {
+          $("#errorMessage").text(
+            "Please select exactly " + numSeats + " seats."
+          );
+        } else {
+          // Confirm the selection
+          if (confirm("Are you sure you want to confirm the selection?")) {
+            $("#errorMessage").text("");
+            var allNameVals = [];
+            var allNumberVals = [];
+            var allSeatsVals = [];
+
+            allNameVals.push($("#Username").val());
+            allNumberVals.push(numSeats);
+            $(".seats:checked:not(:disabled)").each(function () {
+              allSeatsVals.push($(this).val());
+            });
+
+            allSeatsVals.forEach(async (x) => {
+              await set(
+                ref(database, `buses/${window.busId}/seats/${x}`),
+                allNameVals[0]
+              );
+            });
+
+            // Display values
+            $("#nameDisplay").val(allNameVals);
+            $("#NumberDisplay").val(allNumberVals);
+            $("#seatsDisplay").val(allSeatsVals);
+
+            // Refresh the page
+            location.reload();
+          }
+        }
+      };
+    </script>
+
+    <script>
+      function takeData() {
+        if (
+          $("#Username").val().length == 0 ||
+          $("#Numseats").val().length == 0
+        ) {
+          alert("Please Enter your Name and Number of Seats");
+        } else {
+          $(".inputForm *").prop("disabled", true);
+          $(".seatStructure *").prop("disabled", false);
+          $("#notification").html(
+            "<b style='margin-bottom:0px;background:yellow;'>Please Select your Seats NOW!</b>"
+          );
+          loadSeats();
+        }
+      }
+    </script>
+    <script>
+      function navigateToSeatSelection() {
+        // Scroll to the element with ID "seat_selection"
+        const seatSelectionElement = document.getElementById("seat_selection");
+        if (seatSelectionElement) {
+          seatSelectionElement.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    </script>
+  </body>
+</html>

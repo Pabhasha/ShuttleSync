@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bus Tracking System-Admin Login</title>
+    <link rel="stylesheet" href="admin_login.css" />
+  </head>
+  <body>
+    <div class="accont-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-2">
+            <img
+              src="img/Login_copy_new.webp"
+              alt=""
+              width="100%"
+              height="100%"
+            />
+          </div>
+          <div class="col-2">
+            <div class="form-container">
+              <div class="form-btn">
+                <span onclick="Login()">Login</span>
+                <span onclick="Register()">Register</span>
+                <hr id="indicator" />
+              </div>
+
+              <!-- login -->
+              <form action="/login" method="post" id="loginForm">
+                <div class="mb-3">
+                  <select class="form-select" id="role" required>
+                    <option value="">Select Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="student">Student</option>
+                  </select>
+                </div>
+                <input
+                  type="email"
+                  required
+                  name="email"
+                  id="email"
+                  class="form-control shadow-none"
+                  placeholder="Email Address"
+                />
+                <input
+                  type="password"
+                  required
+                  name="password"
+                  id="password"
+                  class="form-control shadow-none"
+                  placeholder="password"
+                />
+                <button name="login" type="submit" class="btn">Login</button>
+
+                <div>
+                  <h5 style="color: rgb(96, 26, 26)">
+                    Don't have an account?<span onclick="Register()"
+                      ><u>Register</u></span
+                    >
+                  </h5>
+                </div>
+              </form>
+
+              <!-- register -->
+
+              <form
+                action="/register"
+                method="post"
+                id="studentRegistrationForm"
+              >
+                <label for="studentName" class="form-label"></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="studentName"
+                  required
+                  placeholder="Full Name"
+                />
+
+                <label for="studentEmail" class="form-label"></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="studentEmail"
+                  required
+                  placeholder="email"
+                />
+
+                <label for="studentPassword" class="form-label"></label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="studentPassword"
+                  required
+                  placeholder="password"
+                />
+
+                <label for="universityId" class="form-label"></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="universityId"
+                  required
+                  placeholder="University Id Number"
+                />
+
+                <button type="submit" class="btn">Register</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Js for toggle menu -->
+    <script src="script.js"></script>
+
+    <!-- js for toggle form -->
+
+    <script>
+      var loginForm = document.getElementById("loginForm");
+      var studentRegistrationForm = document.getElementById(
+        "studentRegistrationForm"
+      );
+      var indicator = document.getElementById("indicator");
+
+      function Register() {
+        studentRegistrationForm.style.transform = " translateX(0px)";
+        loginForm.style.transform = " translateX(0px)";
+        indicator.style.transform = " translateX(100px)";
+      }
+
+      function Login() {
+        studentRegistrationForm.style.transform = " translateX(300px)";
+        loginForm.style.transform = " translateX(300px)";
+        indicator.style.transform = " translateX(0px)";
+      }
+    </script>
+
+    <script type="module">
+      // Import Firebase modules
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        push,
+        get,
+        child,
+      } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCKYdEtZmhE_GLfR1LsIKf75e_YbQjDvSs",
+        authDomain: "computing-project-f65ec.firebaseapp.com",
+        databaseURL:
+          "https://computing-project-f65ec-default-rtdb.firebaseio.com",
+        projectId: "computing-project-f65ec",
+        storageBucket: "computing-project-f65ec.appspot.com",
+        messagingSenderId: "126022707574",
+        appId: "1:126022707574:web:795b761b783e0dfa62f257",
+        measurementId: "G-XG2N2HVR9M",
+      };
+
+      // Initialize Firebase
+      const firebaseApp = initializeApp(firebaseConfig);
+      const database = getDatabase(firebaseApp);
+      const auth = getAuth(firebaseApp);
+
+      const loginForm = document.getElementById("loginForm");
+
+      // student register script start here
+
+      // Form submission event listener
+      const studentRegistrationForm = document.getElementById(
+        "studentRegistrationForm"
+      );
+
+      studentRegistrationForm.addEventListener("submit", (event) => {
+        event.preventDefault(); // Prevent form submission
+
+        // Get student information from form
+        const studentName = document.getElementById("studentName").value;
+        const studentEmail = document.getElementById("studentEmail").value;
+        const studentPassword =
+          document.getElementById("studentPassword").value;
+        const universityId = document.getElementById("universityId").value;
+
+        // Store student data in Firebase Realtime Database
+        const studentsRef = ref(database, "students");
+        push(studentsRef, {
+          name: studentName,
+          email: studentEmail,
+          password: studentPassword, // Include password in the data
+          universityId: universityId,
+        })
+          .then(() => {
+            // Student data stored successfully
+            console.log("Student registered successfully");
+            alert("Student registered successfully!");
+            // Clear form fields
+            studentRegistrationForm.reset();
+          })
+          .catch((error) => {
+            // Handle errors
+            console.error("Error registering student:", error.message);
+            alert("Error registering student: " + error.message);
+          });
+      });
+
+      // student register script end  here
+
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const role = document.getElementById("role").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (role === "admin") {
+          signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              // Redirect to admin page
+              window.location.href = "admin_page.html";
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.error(errorCode, errorMessage);
+              alert("Incorrect email or password. Please try again.");
+            });
+        } else if (role === "student") {
+          // Check if student email exists in database
+          const studentsRef = ref(database, "students");
+          const snapshot = await get(studentsRef);
+          if (snapshot.exists()) {
+            const students = snapshot.val();
+            // Loop through students to find a match
+            let studentExists = false;
+            Object.keys(students).forEach((studentId) => {
+              const student = students[studentId];
+              if (student.email === email && student.password === password) {
+                studentExists = true;
+                // Redirect to student page
+                window.location.href = "index.html";
+              }
+            });
+            if (!studentExists) {
+              alert(
+                "Student with this email does not exist or incorrect password."
+              );
+            }
+          } else {
+            alert("No students registered in the database.");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
